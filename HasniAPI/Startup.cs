@@ -29,9 +29,12 @@ namespace HasniAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCors(c =>
+            services.AddCors(options =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
             // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddDbContext<SSContext>( options => 
@@ -48,7 +51,9 @@ namespace HasniAPI
 
             app.UseHttpsRedirection();
 
-             app.UseRouting();
+            app.UseCors("CorsPolicy");
+
+            app.UseRouting();
 
              app.UseAuthorization();
 

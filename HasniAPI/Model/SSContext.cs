@@ -22,6 +22,7 @@ namespace HasniAPI.Model
         public virtual DbSet<Depot> Depot { get; set; }
         public virtual DbSet<Famillearticle> Famillearticle { get; set; }
         public virtual DbSet<Familleclient> Familleclient { get; set; }
+        public virtual DbSet<Fournisseur> Fournisseur { get; set; }
         public virtual DbSet<Magasin> Magasin { get; set; }
         public virtual DbSet<Sousfamillearticle> Sousfamillearticle { get; set; }
         public virtual DbSet<Tva> Tva { get; set; }
@@ -385,6 +386,22 @@ namespace HasniAPI.Model
                 entity.Property(e => e.LibelleFamilleClt).HasMaxLength(100);
 
                 entity.Property(e => e.Supprime).HasDefaultValueSql("(0)");
+            });
+
+            modelBuilder.Entity<Fournisseur>(entity =>
+            {
+                entity.HasKey(e => e.IdFournisseur)
+                    .HasName("PK__Fourniss__A63C9FB992B754AC");
+
+                entity.Property(e => e.IdFournisseur).ValueGeneratedNever();
+
+                entity.Property(e => e.Nom)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telephone)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Magasin>(entity =>

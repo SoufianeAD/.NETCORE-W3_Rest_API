@@ -11,6 +11,7 @@ namespace HasniAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class MagasinsController : ControllerBase
     {
         private readonly SSContext _context;
